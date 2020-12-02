@@ -20,12 +20,20 @@ Many people tend to buy new gaming consoles in their launch, meanig a large numb
 ----------------------------------------------
 
 ## Linux on the PS3
-contar da historia de que anstes dava pra instalar e tal
+contar da historia de que anstes dava pra instalar e tal. Use o link para explicar mas também deixe ele disponivel se alguem quiser saber mais
+https://www.theverge.com/2019/12/3/20984028/playstation-supercomputer-ps3-umass-dartmouth-astrophysics-25th-anniversary
 
 
 
 ## Setting Up the PS3 and Booting from a Live Image
-falar basicamente do tutorial do cara
+falar basicamente do tutorial do cara. Não enumere os steps q nem ele
+
+PARAR AQUI ANTES DO  STEP 14
+
+    ??? info 
+        If you are interested in compilating your own Linux Kernel, stop right here and jump to read the section "Using buildroot for Cross-Compilation"
+
+CONTINUAR STEP 14
 
 ###
 
