@@ -33,7 +33,7 @@ falar basicamente do tutorial do cara
 
 
 
-## Using bootloader for Cross-Compilation
+## Using buildroot for Cross-Compilation
 
 Buildroot is a set of Makefiles and patches that simplifies and automates the process of building a complete and bootable Linux environment for an embedded system, while using cross-compilation to allow building for multiple target platforms on a single Linux-based development system. Buildroot can automatically build the required cross-compilation toolchain, create a root file system, compile a Linux kernel image, and generate a boot loader for the targeted embedded system, or it can perform any independent combination of these steps. For example, an already installed cross-compilation toolchain can be used independently, while Buildroot only creates the root file system.
 
@@ -45,6 +45,30 @@ We will be using the [petitboot--buildroot](https://github.com/glevand/petitboot
     $ git clone https://github.com/glevand/petitboot--buildroot.git
     $ cd petitboot--buildroot
 
+Now we can configure what we want the buildroot to include in our own linux
+
+    $ make menuconfig
+
+This command should bring up an interface like the one shown below that can be navigated using the arrow keys, Enter and Esc:
+
+![](buildroot.png)
+
+Under Target options we need to change the __Target Architecture__ to the one of the PS3, wich is big endian PowerPC64
+
+![](br-target-opt.png)
+
+After that you can press the Escape key twice to go back to the main menu and then enter the __Kernel__ submenu. There we can select our kernel's verion or specify one to be downloaded. We will also set the Defconfig name as PS3 under the Kernel Configuration option, this will automatically set some configurations specific to the PS3. Also change the Kernel binary format to __vmlinux__ and enable the __Install kernel image to /boot in target__  option.
+
+![](br-kernel.png)
+
+You can also change options under __System Configurations__ and __Target packages__ to personalize your linux and also compile it with some additional programs such as Python or even some emulators.
+
+Finally we can compile it, fot that we will use the commands bellow, the `clean` argument is important if you've alredy tried to compile the os before since it will delete the files generated from previous attempts. The `-j 8` argument means the compiller will use 8 threads from the CPU to compile everything, you can change that value depending on your hardware, the more threads you give the compiller the faster the processing will be.
+
+    $ make clean
+    $ make all -j 8
+
+The compiled Filesystem and kernel will be in `/output/images/`
 
 
 ----------------------------------------------
