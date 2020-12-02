@@ -95,7 +95,7 @@ First we need to mount where our linux will be located
 
 Now we should tar our file system into /dev/ps3dd2 which is mounted at /linux
 
-tar xvf /tmp/petitboot/mnt/sda/rootfs.tar -C /linux
+    tar xvf /tmp/petitboot/mnt/sda/rootfs.tar -C /linux
 
 We now have our file system properly ready to go. We are only left with the initial ramdisk image and possibly the kernel to finalize.
 
