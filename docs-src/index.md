@@ -1,31 +1,53 @@
-# Coloque aqui o nome do tutorial de vocês
+# PS3 Hack
 
-- **Alunes:** .../ ... /...
+- **Alunes:** Gabriel Monteiro / Guilherme Leite / Hugo Carl
 - **Curso:** Engenharia da Computação
 - **Semestre:** 9
-- **Contato:** corsiferrao@gmail.com
+- **Contato:** corsiferrao@gmail.com, guilhermepl3@al.insper.edu.br
 - **Ano:** 2020
 
-## Começando
+## Starting
 
-Para seguir esse tutorial é necessário:
+To follow this tutorial you will need:
 
-- **Hardware:** DE10-Standard e acessórios
-- **Softwares:** Quartus 18.01
-- **Documentos:** [DE10-Standard_User_manual.pdf](https://github.com/Insper/DE10-Standard-v.1.3.0-SystemCD/tree/master/Manual)
+- **Hardware:** PS3 Fat, USB Flash Drive
+- **Software:** A Linux distribution, we will be using Ubuntu
 
-## Motivação
+## Motivation
 
-Expliquem porque quiseram fazer esse tutorial.
+Many people tend to buy new gaming consoles in their launch, meanig a large number of obsolete consoles are left unused the objective of this tutorial is to repurpose these old pieces of hardware by installing GNU/Linux enabliing them to be used for a vast number of applications.
 
 ----------------------------------------------
 
-!!! info 
-    Essas duas partes são obrigatórias no tutorial:
-    
-    - Nome de vocês
-    - Começando
-    - Motivação
+## Linux on the PS3
+contar da historia de que anstes dava pra instalar e tal
+
+
+
+## Setting Up the PS3 and Booting from a Live Image
+falar basicamente do tutorial do cara
+
+###
+
+###
+
+
+
+## Using bootloader for Cross-Compilation
+
+Buildroot is a set of Makefiles and patches that simplifies and automates the process of building a complete and bootable Linux environment for an embedded system, while using cross-compilation to allow building for multiple target platforms on a single Linux-based development system. Buildroot can automatically build the required cross-compilation toolchain, create a root file system, compile a Linux kernel image, and generate a boot loader for the targeted embedded system, or it can perform any independent combination of these steps. For example, an already installed cross-compilation toolchain can be used independently, while Buildroot only creates the root file system.
+
+This means we can create compile a Linux enviroment that will run on the PS3 from our Desktop, this is great because now we don't need to rely on whatever packages, applications and configurations the pre-compiled distribution comes with.
+
+
+We will be using the [petitboot--buildroot](https://github.com/glevand/petitboot--buildroot) project wich is basically buildroot with updates to generate a bootable *petitboot* image. This is because the bootloader, wich is a progtam that loads the operating system into the working memory of a computer on start-up, is called petitboot and is not availabe on the original buildroot
+
+    $ git clone https://github.com/glevand/petitboot--buildroot.git
+    $ cd petitboot--buildroot
+
+
+
+----------------------------------------------
 
 ## Recursos Markdown
 
