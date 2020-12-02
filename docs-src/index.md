@@ -68,8 +68,48 @@ Finally we can compile it, fot that we will use the commands bellow, the `clean`
     $ make clean
     $ make all -j 8
 
-The compiled Filesystem and kernel will be in `/output/images/`
+The compiled Filesystem and kernel will be in `/output/images/` .Inside there, we can find this three outputs:
 
+- rootfs.tar: This is just our Linux Filesystem
+
+- vmlinux: This archive can be found in the /output/images folder like the others or already inside the /rootfs/boot/. This is essentially our kernel .
+
+- rootfs.cpio.gz: This archive relates to the initial ramdisk for our filesystem. This stands for a temporary root file system that will load in memory to help the Linux startup process.
+
+Now, to finalize we need to copy all this to the PS3. First we will put everything in a pen drive and plug in. At the PS3 shell, we should find the pendrive content in the path /tmp/petitboot/mnt/sda(this name can variate)/. 
+
+First we need to mount where our linux will be located
+
+    mkfs.ext4 -m 0 /dev/ps3dd2
+    mkswap /dev/ps3dd1
+    mkdir linux
+    mount /dev/ps3dd2 /linux
+
+Now we should tar our file system into /dev/ps3dd2 which is mounted at /linux
+
+tar xvf /tmp/petitboot/mnt/sda/rootfs.tar -C /linux
+
+We now have our file system properly ready to go. We are only left with the initial ramdisk image and possibly the kernel to finalize.
+
+    cp /tmp/petitboot/mnt/sda/rootfs.cpio.gz /linux/boot
+    
+    !!! warning
+        Check first if the /linux/boot doesn't already have the vmlinux(kernel) inside before executing the next command.
+
+    cp /tmp/petiboot/mnt/sda/vmlinux /linux/boot
+
+Nice, we should have all set to boot our linux right? Yeah kind of....
+If you followed our advice, you know that we didn't succeed in this last attempt and here where things went wrong. To boot our own cross-compiled kernel we needed to only execute the next line:
+
+    kexec -l /linux/boot/vmlinux --initrd=/linux/boot/rootfs.cpio.gz --append="root=/dev/ps3dd2"
+
+Kexec is the bootloader which petitboot is based on. But this didn't work out for us. So now you can choose between searching on how to make it work, or install an already stable distro for the ps3 called Red Ribbon that you saw in the first part of this tutorial. If you are a thrilled to make this work, we recommend René Rebe works to follow on:
+
+- https://www.youtube.com/user/renerebe
+- https://rene.rebe.de/?s=ps3
+- http://t2sde.org/hardware/console/Sony/PS3/
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FgktHdfhw4g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ----------------------------------------------
 
