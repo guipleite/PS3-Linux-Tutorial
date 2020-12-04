@@ -10,8 +10,13 @@
 
 To follow this tutorial you will need:
 
-- **Hardware:** PS3 Fat, USB Flash Drive, Keyboard, Mouse
+- **Hardware:** PS3 (Jailbroken), USB Flash Drive, Keyboard, Mouse
 - **Software:** A Linux distribution, we will be using Ubuntu
+
+??? info 
+    If you need to Jailbreak your PS3 you can follow this tutorial:
+	
+    https://www.youtube.com/watch?v=q-06YPB18N4&t=12s&has_verified=1
 
 ## Motivation
 
@@ -44,7 +49,7 @@ To follow this part of the tutorial you will need:
 In this part of the tutorial we need to install REBUG_4.81.2.PUP in the PS3, this file should be inside the downloaded archive.
 
 
-![](rebug-archive.png)
+![](rebug-archive.PNG)
 
 !!! note 
     In order to downgrade the firmware of the PS3 you need to have the package `Rebug Toolbox`installed in the PS3.
@@ -54,7 +59,7 @@ First of all you need to check in your device if it is possible to downgrade you
 1. `Game` :arrow_right: `Rebug Toolbox` :arrow_right: `Utilities` :arrow_right: `Toggle QA.Flag` :arrow_right: `Enabled`
 2. `Game` :arrow_right: `Rebug Toolbox` :arrow_right: `System` :arrow_right: `Information system`  
     - Make sure the line `PS3 System: Firmware [version] DEX` contains DEX.
-    - In case the version of the firmware is CEX you will need to change the version.
+    - In case the version of the firmware is CEX you will need to change the version. This following tutorial can be useful: https://www.youtube.com/watch?v=0YJBCl4PjCo&t=758s.
 
 After making sure your device match the downgrade requeriments you can proceed the tutorial.
 
@@ -121,11 +126,11 @@ In this moment we will boot a live version of linux in the PS3 so you need to us
 
 At this point you will be able to see the Petitboot screen with some boot options.
 
-![](petitboot-screen.png)
+![](petitboot-screen.PNG)
 
 Press `ESC` on the plugged keyboard, you should be able to access this Linux terminal.
 
-![](ps3-terminal.png)
+![](ps3-terminal.PNG)
 
 In the terminal execute:
 
@@ -139,22 +144,22 @@ In the terminal execute:
 
 Executing these commands will take you back to the Petitboot screen with the boot options, select with the keyboard the first one (Live) and press `Enter`. If everything goes right you will boot the live version of Red Ribbon Linux in the PS3.
 
-![](linux-desktop.png)
+![](linux-desktop.PNG)
 
 The live version of linux doesn't give full access to the system and format the system after a normal reboot so we still need to install the full version of linux into the system.
 
 - At the Desktop click in the only icon `Install Red Ribbon`, it should open the installation screen.
 
-![](installation-linux.png)
+![](installation-linux.PNG)
 
 - `Select continent` :arrow_right: `Select language` :arrow_right: `Enter system's hostname` :arrow_right: `Automatic partitioning` :arrow_right: `Yes`.
 - Finish the installation process and press the upper right On/Off icon in the taskbar, you will be able to see the Logout Menu.
 
-![](logout-linux.png)
+![](logout-linux.PNG)
 
 When selecting the `Boot GameOS` option you will need to remove the USB Stick from the PS3 and you won't need to use it again to boot the linux because now it is installed inside the PS3 partition. If everything goes as planned you shoud be back to the PS3 main OS screen and be able to go back to Linux easily from OtherOS.
 
-![](ps-screen.png)
+![](ps-screen.PNG)
 
 !!! note 
     After finishing the installation process you can update your old PS3 firmware version installed in the process back to a newer version if you want to. This change will not affect the new installed system.
@@ -181,7 +186,7 @@ This command should bring up an interface like the one shown below that can be n
 
 ![](buildroot.png)
 
-Under Target options we need to change the __Target Architecture__ to the one of the PS3, wich is big endian PowerPC64
+Under Target options we need to change the __Target Architecture__ to the one of the PS3, wich is big endian PowerPC64.
 
 ![](br-target-opt.png)
 
@@ -206,14 +211,14 @@ The compiled Filesystem and kernel will be in `/output/images/` .Inside there, w
 
 Now, to finalize we need to copy all this to the PS3. First we will put everything in a pen drive and plug in. At the PS3 shell, we should find the pendrive content in the path /tmp/petitboot/mnt/sda(this name can variate)/. 
 
-First we need to mount where our linux will be located
+First we need to mount where our linux will be located.
 
     mkfs.ext4 -m 0 /dev/ps3dd2
     mkswap /dev/ps3dd1
     mkdir linux
     mount /dev/ps3dd2 /linux
 
-Now we should tar our file system into /dev/ps3dd2 which is mounted at /linux
+Now we should tar our file system into /dev/ps3dd2 which is mounted at /linux.
 
     tar xvf /tmp/petitboot/mnt/sda/rootfs.tar -C /linux
 
